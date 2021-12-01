@@ -1,0 +1,3 @@
+[submodule "client"]
+	path = client
+	url = https://github.com/pranav131100/Traffic-Rule-Violation-System.git

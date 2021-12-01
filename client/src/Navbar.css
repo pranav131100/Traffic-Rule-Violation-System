@@ -1,0 +1,10 @@
+.NavLinks{
+    text-decoration: none;
+}
+.spanClass{
+    color: white;
+}
+
+.spanClass:hover{
+    color: rgb(23, 247, 247);
+}
