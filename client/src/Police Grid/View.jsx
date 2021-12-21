@@ -27,6 +27,27 @@ const View = ()=>{
 })
 
   }
+
+  const onDelete = (event)=>{
+    event.preventDefault();
+
+    if(select === "driver"){
+
+    }
+    else if(select === "address"){
+
+    }
+    else if(select === "mobile_no"){
+
+    }
+    else if(select === "violates"){
+
+    }
+    else if(select === "vehicle"){
+      
+    }
+
+  }
   
   return(
         <>
@@ -41,7 +62,7 @@ const View = ()=>{
     </Form.Text>
   </Form.Group>
   <label>
-          <span style = {{marginRight : "1vw"}}>Select what to view: </span>
+          <span style = {{marginRight : "1vw"}}>Select what to View/Delete: </span>
           <select value = {select} onChange = {selectData}>
             <option value=""> </option>
             <option value="driver">Driver</option>
@@ -68,6 +89,7 @@ const View = ()=>{
       <th style = {{width: "35vw"}}>Name</th>
       <th style = {{width: "15vw"}}>Date of Birth</th>
       <th>Gender</th>
+      <th style = {{width: "5vw"}}>Delete Record</th>
     </tr>
   </thead>
   </Table>)}
@@ -79,6 +101,7 @@ const View = ()=>{
     <tr>
     <th style = {{width: "20vw"}}>License No</th>
       <th>Address</th>
+      <th style = {{width: "5vw"}}>Delete Record</th>
     </tr>
   </thead>
   </Table>)}
@@ -89,6 +112,7 @@ const View = ()=>{
     <tr>
       <th style = {{width: "20vw"}}>License No</th>
       <th>Mobile No</th>
+      <th style = {{width: "5vw"}}>Delete Record</th>
     </tr>
   </thead>
 </Table>)
@@ -103,6 +127,7 @@ const View = ()=>{
       <th style = {{width: "25vw"}}>Rule Id</th>
       <th style = {{width: "25vw"}}>Offence Id</th>
       <th style = {{width: "25vw"}}>Payment Status</th>
+      <th style = {{width: "5vw"}}>Delete Record</th>
     </tr>
   </thead>
 </Table>
@@ -119,6 +144,7 @@ const View = ()=>{
       <th style = {{width: "25vw"}}>Vehicle No</th>
       <th style = {{width: "25vw"}}>Model</th>
       <th style = {{width: "25vw"}}>Chasis No</th>
+      <th style = {{width: "5vw"}}>Delete Record</th>
     </tr>
   </thead>
 </Table>
@@ -154,6 +180,7 @@ const View = ()=>{
       <td style = {{width: "35vw"}}>{val.Name}</td>
       <td style = {{width: "15vw"}}>{val.DOB}</td>
       <td>{val.Gender}</td>
+      <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>
@@ -168,7 +195,7 @@ const View = ()=>{
     <tr>
       <td style = {{width: "20vw"}}>{val.License_No}</td>
       <td>{val.address}</td>
-      
+      <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>)
@@ -181,7 +208,7 @@ const View = ()=>{
     <tr>
       <td style = {{width: "20vw"}}>{val.License_No}</td>
       <td>{val.phone}</td>
-  
+      <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>)
@@ -197,7 +224,7 @@ const View = ()=>{
             <td style = {{width: "25vw"}}>{val.RULE_Id}</td>
             <td style = {{width: "25vw"}}>{val.Offence_Id}</td>
             <td style = {{width: "25vw"}}>{val.status}</td>
-            
+            <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>
@@ -215,7 +242,7 @@ const View = ()=>{
             <td style = {{width: "25vw"}}>{val.Vehicle_No}</td>
             <td style = {{width: "25vw"}}>{val.Model}</td>
             <td style = {{width: "25vw"}}>{val.chasis_No}</td>
-            
+            <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>
@@ -233,6 +260,7 @@ const View = ()=>{
             <td>{val.date}</td>
             <td>{val.time}</td>
             <td>{val.Evidance}</td>
+            <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
         </tr>
         </tbody>
         </table>)

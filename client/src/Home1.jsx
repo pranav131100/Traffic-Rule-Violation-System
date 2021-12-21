@@ -22,6 +22,7 @@ const verification = (event)=>{
   }).then((response)=>{
     if(response.data.length === 1){
      Auth = true;
+     alert("Policeman Login Successful.");
      history.push('/login/police');
     }
     else{

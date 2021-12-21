@@ -20,14 +20,10 @@ const PoliceGrid = ()=>{
   <Row>
     <Col><Cards title = "Insert" link = "/login/police/insert"></Cards></Col>
     <Col><Cards title = "Update" link = "/login/police/update"></Cards></Col>
-    <Col><Cards title = "Delete" link = "/login/police/delete"></Cards></Col>
+    <Col><Cards title = "View/Delete" link = "/login/police/view"></Cards></Col>
+    <Col><Cards title = "Rules" link = "/login/police/rule"></Cards></Col>
   </Row>
   <br />
-  <Row>
-    <Col><Cards title = "View" link = "/login/police/view"></Cards></Col>
-    <Col><Cards title = "Rules" link = "/login/police/rule"></Cards></Col>
-    <Col></Col>
-  </Row>
 </Container>
 
 <Switch>
