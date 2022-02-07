@@ -276,6 +276,41 @@ app.post("/login",(req,res)=>{
     console.log("Login page from server side");
 })
 
+app.delete("/api/delete/:lno",async(req,res)=>{
+    try{
+
+        const Lno = req.params.lno;
+
+        db.query("DELETE from driver where License_No = ?",[Lno],(err,result)=>{
+            if(err){
+                console.log(err);
+            }else{
+                console.log(result)
+            }
+        })
+    }catch(err){
+        res.status(400).send(err);
+    }
+})
+
+app.delete("/api/address/delete/:lno/:address",async(req,res)=>{
+    try{
+
+        const Lno = req.params.lno;
+        const address = req.params.address;
+
+        db.query("DELETE from address where License_No = ? and address = ?",[Lno,address],(err,result)=>{
+            if(err){
+                console.log(err);
+            }else{
+                console.log(result)
+            }
+        })
+    }catch(err){
+        res.status(400).send(err);
+    }
+})
+
 app.listen(3001, ()=>{
     console.log("Running at port 3001");
 });

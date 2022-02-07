@@ -21,8 +21,11 @@ const verification = (event)=>{
     Password:Password
   }).then((response)=>{
     if(response.data.length === 1){
-     Auth = true;
+     localStorage.setItem("Police",response.data[0].Reg_no);
+     localStorage.setItem("plogged",true);
      alert("Policeman Login Successful.");
+
+    console.log(response.data);
      history.push('/login/police');
     }
     else{

@@ -2,14 +2,16 @@ import React, {useState } from 'react'
 import { Form,Button } from 'react-bootstrap';
 import Axios from 'axios';
 import { Table } from 'react-bootstrap';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import { useHistory } from 'react-router-dom';
 
-const View = ()=>{
+const CivilianView = ()=>{
   
   const [Lno,setLno] = useState("");
   const [select,setSelect] = useState("");
   const[info,setInfo] = useState([]);
   const dummy = ["dummy"];
+  const history = useHistory();
 
   const selectData = (event)=>{
     setSelect(event.target.value);
@@ -18,49 +20,32 @@ const View = ()=>{
 
   const submitData = (event)=>{
     event.preventDefault();
-    
-  Axios.get(`http://localhost:3001/api/view/${Lno}/${select}`).then((result)=>{
+
+    const lno = localStorage.getItem("Lno")
+
+    if(lno){
+        Axios.get(`http://localhost:3001/api/view/${lno}/${select}`).then((result)=>{
   setInfo(result.data);
   
 }).catch((err)=>{
   console.log(err);
 })
+    }
+    else{
+        history.push('/main');
+    }
+    
+  
 
   }
 
-  const onDelete = (event)=>{
-    event.preventDefault();
-
-    if(select === "driver"){
-
-    }
-    else if(select === "address"){
-
-    }
-    else if(select === "mobile_no"){
-
-    }
-    else if(select === "violates"){
-
-    }
-    else if(select === "vehicle"){
-      
-    }
-
-  }
+ 
   
   return(
         <>
 <div style = {{margin: "2vw 7.6vw"}}>
 <Form>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
-    <Form.Label>License Number</Form.Label>
-    <Form.Control type="text" placeholder="License No"  value = {Lno} onChange = {(event)=>{
-        setLno(event.target.value);
-    }}/>
-    <Form.Text className="text-muted">
-    </Form.Text>
-  </Form.Group>
+  
   <label>
           <span style = {{marginRight : "1vw"}}>Select what to View/Delete: </span>
           <select value = {select} onChange = {selectData}>
@@ -89,7 +74,7 @@ const View = ()=>{
       <th style = {{width: "35vw"}}>Name</th>
       <th style = {{width: "15vw"}}>Date of Birth</th>
       <th>Gender</th>
-      <th style = {{width: "5vw"}}>Delete Record</th>
+      
     </tr>
   </thead>
   </Table>)}
@@ -101,7 +86,7 @@ const View = ()=>{
     <tr>
     <th style = {{width: "20vw"}}>License No</th>
       <th>Address</th>
-      <th style = {{width: "5vw"}}>Delete Record</th>
+
     </tr>
   </thead>
   </Table>)}
@@ -112,7 +97,6 @@ const View = ()=>{
     <tr>
       <th style = {{width: "20vw"}}>License No</th>
       <th>Mobile No</th>
-      <th style = {{width: "5vw"}}>Delete Record</th>
     </tr>
   </thead>
 </Table>)
@@ -127,7 +111,6 @@ const View = ()=>{
       <th style = {{width: "25vw"}}>Rule Id</th>
       <th style = {{width: "25vw"}}>Offence Id</th>
       <th style = {{width: "25vw"}}>Payment Status</th>
-      <th style = {{width: "5vw"}}>Delete Record</th>
     </tr>
   </thead>
 </Table>
@@ -144,7 +127,7 @@ const View = ()=>{
       <th style = {{width: "25vw"}}>Vehicle No</th>
       <th style = {{width: "25vw"}}>Model</th>
       <th style = {{width: "25vw"}}>Chasis No</th>
-      <th style = {{width: "5vw"}}>Delete Record</th>
+     
     </tr>
   </thead>
 </Table>
@@ -180,13 +163,6 @@ const View = ()=>{
       <td style = {{width: "35vw"}}>{val.Name}</td>
       <td style = {{width: "15vw"}}>{val.DOB}</td>
       <td>{val.Gender}</td>
-      <td style = {{width: "5vw"}}><Button variant="danger" onClick = {(event)=>{
-          event.preventDefault();
-          Axios.delete(`http://localhost:3001/api/delete/${val.License_No}`).then((result)=>{
-              alert("Record Deleted Successfully");
-              window.location.reload(false);
-          })
-      }}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>
@@ -201,18 +177,7 @@ const View = ()=>{
     <tr>
       <td style = {{width: "20vw"}}>{val.License_No}</td>
       <td>{val.address}</td>
-      <td style = {{width: "5vw"}}><Button variant="danger" onClick = {(event)=>{
-        event.preventDefault();
-        Axios.delete(`http://localhost:3001/api/address/delete/${val.License_No}/${val.address}`).then((result)=>{
-          console.log(result);
-          alert("Record Deleted Successfully!");
-          window.location.reload(false);
-        }).catch((err)=>{
-          console.log(err);
-        })
-          
-      }}>Delete</Button></td>
-      <td><Button variant = "primary"></Button></td>
+      
     </tr>
   </tbody>
 </Table>)
@@ -225,7 +190,6 @@ const View = ()=>{
     <tr>
       <td style = {{width: "20vw"}}>{val.License_No}</td>
       <td>{val.phone}</td>
-      <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>)
@@ -241,7 +205,6 @@ const View = ()=>{
             <td style = {{width: "25vw"}}>{val.RULE_Id}</td>
             <td style = {{width: "25vw"}}>{val.Offence_Id}</td>
             <td style = {{width: "25vw"}}>{val.status}</td>
-            <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>
@@ -259,7 +222,6 @@ const View = ()=>{
             <td style = {{width: "25vw"}}>{val.Vehicle_No}</td>
             <td style = {{width: "25vw"}}>{val.Model}</td>
             <td style = {{width: "25vw"}}>{val.chasis_No}</td>
-            <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
     </tr>
   </tbody>
 </Table>
@@ -277,7 +239,6 @@ const View = ()=>{
             <td>{val.date}</td>
             <td>{val.time}</td>
             <td>{val.Evidance}</td>
-            <td style = {{width: "5vw"}}><Button variant="danger" onClick = {onDelete}>Delete</Button></td>
         </tr>
         </tbody>
         </table>)
@@ -299,4 +260,4 @@ const View = ()=>{
     )
 }
 
-export default View;
+export default CivilianView;

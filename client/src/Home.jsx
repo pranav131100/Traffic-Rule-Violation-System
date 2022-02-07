@@ -33,7 +33,9 @@ const onSubmits = (event)=>{
     console.log(result.data);
     if(result.data.length == 1){
         Auth1 = true;
-        history.push('/login/civilian');
+        localStorage.setItem("Lno",Lno);
+        localStorage.setItem("clogged",true)
+        history.push(`/login/civilian/${Lno}`);
     }else{
       alert("Invalid login credentials");
     }

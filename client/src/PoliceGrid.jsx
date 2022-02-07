@@ -9,8 +9,15 @@ import Insert from './Police Grid/Insert';
 import Update from './Police Grid/Update';
 import Delete from './Police Grid/Delete';
 import Navbar from './Navbar'
+import { useEffect } from 'react';
 
-const PoliceGrid = ()=>{
+const PoliceGrid = (props)=>{
+
+  useEffect(()=>{
+    
+  })
+
+
     return(
 <>
 <Navbar></Navbar>
